@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { CssBaseline, Paper, Switch ,Box} from "@mui/material";
+import TodoContainer from "./components/TodoContainer";
+ import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+import { Container } from "@mui/system";
 
 function App() {
+  const[darkMode , setDarkMode] = useState(false)
+
+  const theme = createTheme({
+    palette: {
+      
+      mode: darkMode ? "dark" : "light",
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline></CssBaseline>
+      <div className="App">
+        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+        CHANGE THEME
+        <TodoContainer />
+      </div>
+    </ThemeProvider>
   );
 }
 
